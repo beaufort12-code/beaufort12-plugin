@@ -1,0 +1,16 @@
+{
+  "name": "beaufort12",
+  "description": "Salesforce marketing and file operations for Claude",
+  "owner": {
+    "name": "Beaufort 12",
+    "email": "admin@beaufort12.com",
+    "url": "https://www.beaufort12.com"
+  },
+  "plugins": [
+    {
+      "name": "beaufort12",
+      "source": "./",
+      "description": "Mailchimp and Dropbox operations on your Salesforce records, from Claude."
+    }
+  ]
+}
