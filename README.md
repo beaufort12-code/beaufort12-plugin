@@ -24,7 +24,7 @@ Mailchimp-only org never registers Dropbox tools.
 In Claude Code:
 
 ```text
-/plugin marketplace add oceangbr/beaufort12-plugin
+/plugin marketplace add beaufort12-code/beaufort12-plugin
 /plugin install beaufort12@beaufort12
 ```
 
