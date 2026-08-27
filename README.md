@@ -5,6 +5,8 @@ your Salesforce records. Skills decide the workflow. Your org's
 [Salesforce Hosted MCP](https://help.salesforce.com) server supplies the
 tools. Beaufort 12 is not in the data path.
 
+![Beaufort 12 — six guided workflows for Mailchimp and Dropbox, from Claude](docs/overview.jpg)
+
 ## What you get
 
 | Skill | When to use it |
