@@ -2,7 +2,10 @@
   "mcpServers": {
     "salesforce": {
       "type": "http",
-      "url": "${user_config.salesforce_mcp_url}"
+      "url": "${user_config.salesforce_mcp_url}",
+      "oauth": {
+        "clientId": "${user_config.salesforce_oauth_client_id}"
+      }
     }
   }
 }

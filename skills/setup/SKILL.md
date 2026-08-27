@@ -113,8 +113,11 @@ state. Never call them speculatively.
 Paste the server URL. Put the Consumer Key in Advanced settings as the
 OAuth Client ID. Connect, sign in to Salesforce, Allow.
 
-**This plugin in Claude Code:** paste the same server URL when the plugin
-prompts for `salesforce_mcp_url`. Complete the Salesforce OAuth prompt.
+**This plugin in Claude Code:** when prompted, paste the same server URL
+as `salesforce_mcp_url` and the External Client App **Consumer Key** as
+`salesforce_oauth_client_id`. Then complete the Salesforce OAuth prompt.
+Without the Consumer Key, Claude Code tries Dynamic Client Registration
+and Salesforce returns `invalid_client`.
 
 Use the claude.ai connector callback. Do not use `--callback-port`.
 Claude Code picks a random port and Salesforce returns `redirect_uri_mismatch`.

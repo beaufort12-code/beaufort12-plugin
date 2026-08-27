@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1 — 2026-08-28
+
+- Add required `userConfig.salesforce_oauth_client_id` (Consumer Key) and
+  pass it as `oauth.clientId` so Claude Code does not attempt Dynamic
+  Client Registration against Salesforce Hosted MCP.
+
 ## 0.1.0 — 2026-08-27
 
 - Initial public plugin: six marketing-ops skills for Mailchimp and Dropbox.

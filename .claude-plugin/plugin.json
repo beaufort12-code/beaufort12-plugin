@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "beaufort12",
   "displayName": "Beaufort 12 — Marketing Ops for Salesforce",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Mailchimp and Dropbox operations on your Salesforce records, from Claude.",
   "author": {
     "name": "Beaufort 12",
@@ -17,8 +17,15 @@
     "salesforce_mcp_url": {
       "type": "string",
       "title": "Salesforce MCP server URL",
-      "description": "From Setup → MCP Servers in your Salesforce org. Production: https://api.salesforce.com/platform/mcp/v1/custom/<ApiName>. Sandbox: https://api.salesforce.com/platform/mcp/v1/sandbox/custom/<ApiName>. Add only the Beaufort 12 actions you have installed.",
+      "description": "From Setup → MCP Servers in your Salesforce org. Production: https://api.salesforce.com/platform/mcp/v1/custom/<ApiName>. Sandbox: https://api.salesforce.com/platform/mcp/v1/sandbox/custom/<ApiName>. Add only the Beaufort 12 actions you have installed. The server must be Active.",
       "required": true
+    },
+    "salesforce_oauth_client_id": {
+      "type": "string",
+      "title": "Salesforce External Client App Consumer Key",
+      "description": "OAuth Client ID from the Hosted MCP External Client App (mcp_api + JWT named-user tokens). Not the B12 Mailchimp or Dropbox gateway app. Required so Claude Code does not attempt Dynamic Client Registration.",
+      "required": true,
+      "sensitive": true
     }
   }
 }

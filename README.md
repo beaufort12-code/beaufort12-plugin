@@ -28,9 +28,15 @@ In Claude Code:
 /plugin install beaufort12@beaufort12
 ```
 
-Then paste your Salesforce Hosted MCP URL when prompted. Read
-[SETUP.md](SETUP.md) before you connect — the JWT named-user token
-setting is easy to miss and produces a silent empty tool list.
+Then paste, when prompted:
+
+- Salesforce Hosted MCP URL (`salesforce_mcp_url`)
+- External Client App **Consumer Key** (`salesforce_oauth_client_id`)
+
+Read [SETUP.md](SETUP.md) before you connect. The JWT named-user token
+setting is easy to miss and produces a silent empty tool list. Without
+the Consumer Key, Claude Code tries Dynamic Client Registration and
+Salesforce returns `invalid_client`.
 
 ## Prerequisites
 

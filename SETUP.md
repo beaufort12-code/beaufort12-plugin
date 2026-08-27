@@ -112,13 +112,28 @@ state. Never call them speculatively.
 Paste the server URL. Put the Consumer Key in Advanced settings as the
 OAuth Client ID. Connect, sign in to Salesforce, Allow.
 
-**This plugin in Claude Code:** paste the same server URL when the plugin
-prompts for `salesforce_mcp_url`. Complete the Salesforce OAuth prompt.
+**This plugin in Claude Code:** when prompted, paste the same server URL
+as `salesforce_mcp_url` and the External Client App **Consumer Key** as
+`salesforce_oauth_client_id`. Then complete the Salesforce OAuth prompt.
+Without the Consumer Key, Claude Code tries Dynamic Client Registration
+and Salesforce returns `invalid_client`.
 
 Use the claude.ai connector callback. Do not use `--callback-port`.
 Claude Code picks a random port and Salesforce returns `redirect_uri_mismatch`.
 
 The External Client App can take up to 30 minutes to become usable.
+
+## 4b. `invalid_client` during registration
+
+If `/mcp` shows `plugin:beaufort12:salesforce` failed with Dynamic Client
+Registration rejected (HTTP 401 `invalid_client`):
+
+1. Confirm the plugin has `salesforce_oauth_client_id` set to the
+   Consumer Key from the Hosted MCP External Client App (`mcp_api`).
+2. Do not use the B12 Mailchimp or Dropbox gateway app keys.
+3. Reconnect from `/mcp`, or `/plugin` → configure, then start a new chat.
+
+Do not retry reconnect without the Consumer Key — it will fail the same way.
 
 ## 5. Empty tool list — JWT trap
 
