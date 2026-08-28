@@ -36,8 +36,10 @@ Never ask the user for a Salesforce Id. Resolve names and emails with
 
 ## Workflow
 
-1. **Connection.** Call `mc_check`. If Mailchimp is not connected, stop
-   and tell the admin to finish Mailchimp Connect.
+1. **Connection.** If `mc_check` or `mone__McAgentGetConnectionStatus`
+   is on this server, call it. If Mailchimp is not connected, stop and
+   tell the admin to finish Mailchimp Connect. If no connection tool is
+   present, say so and continue.
 2. **Resolve the person.** Name or email → `mc_find_record`. If several
    records match, list names and emails and ask which one. Do not guess.
 3. **Resolve the audience.** If they named a list, `mc_find_audience`.
@@ -70,6 +72,5 @@ Give a short diagnosis, then the next action. Typical outcomes:
 
 - Hide Salesforce and Mailchimp Ids in user-facing replies.
 - Present `userMessage` from tools when it is written for a person.
-- Mutating tools (`mc_subscribe`, `mc_create_wizard`, `mc_run_wizard`)
-  need an explicit yes.
+- Mutating tools (`mc_subscribe`) need an explicit yes.
 - Do not expose raw SOQL, package namespace chatter, or stack traces.

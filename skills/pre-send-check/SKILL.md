@@ -32,7 +32,9 @@ Never ask for a Salesforce Id. Resolve the audience by name.
 
 ## Workflow
 
-1. **Connection.** `mc_check`. Stop if disconnected.
+1. **Connection.** If `mc_check` or `mone__McAgentGetConnectionStatus`
+   is on this server, call it and stop if disconnected. If no
+   connection tool is present, say so and continue.
 2. **Audience.** Resolve with `mc_find_audience`. If they did not name
    one, list audiences and ask.
 3. **Deliverability.** `mc_deliverability` first. This is the headline:

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.0 — 2026-08-28
+
+- Recommend `mc_record_audiences`, `mc_growth`, and `mc_record_tags` in
+  SETUP.md so skills and the Hosted MCP server list the same tools.
+- Make `sync-triage` and `pre-send-check` continue when `mc_check` is
+  not on the server. Keep the write-gate on `mc_subscribe` only.
+- Add a verify-the-install step and tell admins not to register unused
+  Mailchimp extras or Dropbox near-duplicates.
+- Add `scripts/check-tool-alignment.mjs` so skill aliases cannot drift
+  from the SETUP.md recommended list.
+
 ## 0.1.1 — 2026-08-28
 
 - Add required `userConfig.salesforce_oauth_client_id` (Consumer Key) and

@@ -59,21 +59,28 @@ aliases are in parentheses.
 - Mailchimp: Find Mailchimp Audience (`mc_find_audience`)
 - Mailchimp: Find Mailchimp Member Live (`mc_find_member`)
 - Mailchimp: Find Missing Mailchimp Audience Members (`mc_find_missing`)
+- Mailchimp: List Mailchimp Audiences for Record (`mc_record_audiences`)
 - Mailchimp: Find Stale Or At-Risk Mailchimp Members (`mc_find_stale`)
 - Mailchimp: Find Bounce And Unsubscribe Risks (`mc_find_risks`)
 - Mailchimp: Get Mailchimp Audience Summary (`mc_audience`)
+- Mailchimp: Get Mailchimp Audience Growth Trends (`mc_growth`)
 - Mailchimp: Get Mailchimp Sync Status (`mc_sync`)
 - Mailchimp: Check Mailchimp Deliverability (`mc_deliverability`)
 - Mailchimp: Get Mailchimp Record Engagement Summary (`mc_engagement`)
 - Mailchimp: Get Mailchimp Record Email Activity (`mc_activity`)
 - Mailchimp: List Recent Mailchimp Campaigns (`mc_campaigns`)
 - Mailchimp: Get Mailchimp Campaign Summary (`mc_campaign`)
+- Mailchimp: Get Mailchimp Record Tags (`mc_record_tags`)
 - Mailchimp: Subscribe Mailchimp Subscriber (`mc_subscribe`) — write
 - Mailchimp: Unsubscribe Mailchimp Subscriber (`mc_unsubscribe`) — write
 - Mailchimp: Manage Mailchimp Tags (`mc_tags`) — write
 
 Do not add `McInvocableMembers`, `McInvocableTags`, or gateway utilities.
 The `McAgent*` classes are the agent interface.
+
+Do not register Mailchimp extras the skills do not use:
+`mc_compare`, `mc_event`, `mc_merge_field`, `mc_recipients`,
+`mc_suggest`, `mc_taxonomy`, `mc_followup`, `mc_create_wizard`.
 
 ### Recommended Dropbox actions
 
@@ -92,6 +99,16 @@ Add these when Dropbox for Agentforce is installed.
 
 Share and folder-link actions are named "Get" but they **create** sharing
 state. Never call them speculatively.
+
+Register only these eight. Skip near-duplicates from the Setup UI
+(`SearchFiles` vs `SearchFilesByName`, `GetShareLink` vs
+`GetFileShareLink`, `CopyItem` / `CopyRecordItem` / `CopyDryRun`,
+`MoveItem` / `MoveRecordItem`, `RenameItem` / `RenameRecordItem`,
+`DeleteFile` / `DeleteRecordItem`, `CreateFolder` /
+`CreateRecordSubfolder`, `GetStorage` / `GetStorageSummary`,
+`ListFiles` / `ListRecordFiles` / `ListRecordFolders`,
+`CheckConnection` / `CheckConnectionStatus`). Extra tools cost context
+and the truncated Setup-UI names are hard to tell apart.
 
 ## 3. External Client App
 
@@ -124,6 +141,18 @@ Claude Code picks a random port and Salesforce returns `redirect_uri_mismatch`.
 
 The External Client App can take up to 30 minutes to become usable.
 
+## 4b. `invalid_client` during registration
+
+If `/mcp` shows `plugin:beaufort12:salesforce` failed with Dynamic Client
+Registration rejected (HTTP 401 `invalid_client`):
+
+1. Confirm the plugin has `salesforce_oauth_client_id` set to the
+   Consumer Key from the Hosted MCP External Client App (`mcp_api`).
+2. Do not use the B12 Mailchimp or Dropbox gateway app keys.
+3. Reconnect from `/mcp`, or `/plugin` → configure, then start a new chat.
+
+Do not retry reconnect without the Consumer Key — it will fail the same way.
+
 ## 5. Empty tool list — JWT trap
 
 If OAuth says **Connected** and `tools/list` is empty:
@@ -153,6 +182,24 @@ Salesforce, they cannot reach it through this plugin.
 
 After you change tools on the server, disconnect and reconnect, then
 start a new chat. An old chat will not see new tools.
+
+## 7. Verify the install
+
+After Activate, reconnect, and a **new** chat:
+
+1. Call `mc_check` if a Mailchimp connection tool is present
+   (`mc_check` or `mone__McAgentGetConnectionStatus`). Call `dbx_check`
+   if a Dropbox connection tool is present.
+2. Compare the live tool list to the recommended list for the products
+   they installed.
+3. Report gaps by alias and Apex label. The skills need these if
+   Mailchimp is installed: `mc_check`, `mc_record_audiences`,
+   `mc_growth`, `mc_record_tags`.
+4. Tell them to add the missing Apex actions, reconnect, and start a
+   new chat.
+
+If a connection tool is absent, say so and continue the list check.
+Do not invent a workaround.
 
 ## If a skill cannot see its tools
 
