@@ -73,13 +73,29 @@ aliases are in parentheses.
 - Mailchimp: Subscribe Mailchimp Subscriber (`mc_subscribe`) — write
 - Mailchimp: Unsubscribe Mailchimp Subscriber (`mc_unsubscribe`) — write
 - Mailchimp: Manage Mailchimp Tags (`mc_tags`) — write
+- Mailchimp: Suggest Mailchimp Field Mappings (`mc_suggest`)
+- Mailchimp: Create Mailchimp Merge Field (`mc_merge_field`) — write
+- Mailchimp: Create Mailchimp Data Wizard (`mc_create_wizard`) — write
 
 Do not add `McInvocableMembers`, `McInvocableTags`, or gateway utilities.
 The `McAgent*` classes are the agent interface.
 
+The last three build Data Wizards and are what `audience-build` needs.
+Their Setup-UI labels may read slightly differently in your org — match
+on "Field Mapping", "Merge Field" and "Data Wizard", and pick the
+namespaced `mone__McAgent*` class. Leave all three off the server if you
+only want a read-and-diagnose install; the skill then hands the admin a
+build spec for the Data Wizard UI instead of calling anything.
+
+`mc_create_wizard` has no filter or criteria parameter — it takes a
+source object, an audience, a mapping, a schedule, and an optional
+recency window. A wizard syncs a population; a segment is built in
+Mailchimp on the merge fields it syncs. `audience-build` says so rather
+than pretending otherwise.
+
 Do not register Mailchimp extras the skills do not use:
-`mc_compare`, `mc_event`, `mc_merge_field`, `mc_recipients`,
-`mc_suggest`, `mc_taxonomy`, `mc_followup`, `mc_create_wizard`.
+`mc_compare`, `mc_event`, `mc_recipients`, `mc_taxonomy`,
+`mc_followup`.
 
 ### Recommended Dropbox actions
 
@@ -191,11 +207,21 @@ After Activate, reconnect, and a **new** chat:
    if a Dropbox connection tool is present.
 2. Compare the live tool list to the recommended list for the products
    they installed.
-3. Report gaps by alias and Apex label. The skills need these if
-   Mailchimp is installed: `mc_check`, `mc_record_audiences`,
-   `mc_growth`, `mc_record_tags`.
-4. Tell them to add the missing Apex actions, reconnect, and start a
-   new chat.
+3. Report gaps by alias and Apex label. Distinguish the two kinds:
+   - **Load-bearing.** `mc_find_record`, `mc_find_audience`,
+     `mc_find_member`, `mc_record_audiences`, `mc_deliverability`,
+     `mc_engagement`. Skills stall without these.
+   - **Degrade cleanly.** `mc_check` and `mc_record_tags` are absent from
+     some servers and package versions. Skills are written to continue
+     without them — do not chase them. `audience-build` without
+     `mc_suggest`, `mc_merge_field` and `mc_create_wizard` gives a build
+     spec instead of creating a wizard, which is a supported outcome.
+4. Confirm `mc_find_audience` resolves a real audience name. The `*`
+   wildcard listing is documented on the tool but is not implemented in
+   every package version — test with a name you know exists, not `*`.
+5. Tell them to add the missing Apex actions, reconnect, and start a
+   new chat. If the tool list changes inside a live chat, that chat is
+   unreliable — start a new one.
 
 If a connection tool is absent, say so and continue the list check.
 Do not invent a workaround.

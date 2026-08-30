@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "beaufort12",
   "displayName": "Beaufort 12 — Marketing Ops for Salesforce",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Mailchimp and Dropbox operations on your Salesforce records, from Claude.",
   "author": {
     "name": "Beaufort 12",

@@ -42,13 +42,17 @@ Never ask the user for a Salesforce Id. Resolve names and emails with
    present, say so and continue.
 2. **Resolve the person.** Name or email → `mc_find_record`. If several
    records match, list names and emails and ask which one. Do not guess.
-3. **Resolve the audience.** If they named a list, `mc_find_audience`.
-   If they did not, `mc_record_audiences` on the person, or list audiences
-   with `mc_find_audience` and `*`.
+3. **Resolve the audience.** If they named a list, `mc_find_audience`
+   with the exact name. If they did not, prefer `mc_record_audiences` on
+   the person. The `*` wildcard listing is documented but not implemented
+   in every package version — if it returns no match, ask the user for
+   the audience name rather than concluding no audiences exist.
 4. **Live status.** `mc_find_member` with the email. This is Mailchimp
    truth, not the Salesforce sync table.
 5. **Salesforce gap.** `mc_find_missing` on that audience if you need to
-   confirm they are absent from synced members.
+   confirm they are absent from synced members. It needs a source object
+   as well as the audience — pass Contact or Lead to match the record you
+   resolved in step 2, not both.
 6. **Sync job.** If they said a wizard or batch is running, `mc_sync`
    before you declare them missing.
 
@@ -60,7 +64,9 @@ Give a short diagnosis, then the next action. Typical outcomes:
 - **Wrong audience** — they are on a different list. Name it.
 - **No email** — the Salesforce email field is blank. Sync cannot run.
 - **Not in the wizard / criteria** — they do not match the Data Wizard
-  filters. Say which check failed if the tool tells you.
+  filters, or no wizard covers this population at all. Say which check
+  failed if the tool tells you. If the answer is that no wizard exists,
+  hand off to `audience-build` rather than subscribing them one by one.
 - **Unsubscribed or cleaned in Mailchimp** — do not silently resubscribe.
   Explain status and ask before `mc_subscribe`.
 - **Sync still running** — wait and poll `mc_sync`. Do not create a

@@ -23,7 +23,7 @@ If Mailchimp tools are not on this server, say so and stop.
 | Stale / at-risk | `mc_find_stale` | Mailchimp: Find Stale Or At-Risk Mailchimp Members |
 | Engagement | `mc_engagement` | Mailchimp: Get Mailchimp Record Engagement Summary |
 | Activity | `mc_activity` | Mailchimp: Get Mailchimp Record Email Activity |
-| Tags on a person | `mc_record_tags` | Mailchimp: Get Mailchimp Record Tags |
+| Tags on a person | `mc_record_tags` | Mailchimp: Get Mailchimp Record Tags — may not be registered; skip the check if absent |
 | Apply tags | `mc_tags` | Mailchimp: Manage Mailchimp Tags |
 | Person | `mc_find_record` | Mailchimp: Find Salesforce Record |
 
@@ -39,8 +39,14 @@ Never ask for a Salesforce Id.
    is believable.
 4. **Propose the tag.** Suggest a single clear tag such as
    `reengage-2026-q3`. Ask before creating or applying it.
-5. **Tag.** After yes, `mc_tags` to add the tag. Do not also unsubscribe
-   or delete anyone unless they explicitly asked for a sunset.
+5. **Tag.** `mc_tags` takes one `recordId` per input — it tags a
+   person, not a segment. Before you start, say how many people that
+   means and get a yes for that number. Then tag them, batching inputs
+   in one call where the tool accepts an array. If the set is large,
+   propose a cap (say the fifty least engaged) rather than silently
+   tagging a few and implying you did them all. Report how many you
+   actually tagged. Do not also unsubscribe or delete anyone unless they
+   explicitly asked for a sunset.
 
 ## What "done" looks like
 

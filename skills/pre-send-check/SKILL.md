@@ -35,8 +35,10 @@ Never ask for a Salesforce Id. Resolve the audience by name.
 1. **Connection.** If `mc_check` or `mone__McAgentGetConnectionStatus`
    is on this server, call it and stop if disconnected. If no
    connection tool is present, say so and continue.
-2. **Audience.** Resolve with `mc_find_audience`. If they did not name
-   one, list audiences and ask.
+2. **Audience.** Resolve with `mc_find_audience` using the exact name.
+   If they did not name one, ask. Do not rely on the `*` wildcard listing
+   — it is documented but not implemented in every package version, and a
+   no-match result there does not mean the org has no audiences.
 3. **Deliverability.** `mc_deliverability` first. This is the headline:
    bounces, spam complaints, unsubscribes, sending-domain authentication,
    and Mailchimp's own advice.
@@ -44,7 +46,8 @@ Never ask for a Salesforce Id. Resolve the audience by name.
    signals. Do not dump a raw list — summarise counts and name a few
    examples.
 5. **Audience shape.** `mc_audience` for subscribed vs unsubscribed and
-   tag mix. Flag a tiny or suddenly shrunken list.
+   tag mix, then `mc_growth` for recent subscribe / unsubscribe trend.
+   Flag a tiny or suddenly shrunken list.
 6. **Last send.** `mc_campaigns` then `mc_campaign` on the most recent
    relevant send if they asked "how did the last one do".
 

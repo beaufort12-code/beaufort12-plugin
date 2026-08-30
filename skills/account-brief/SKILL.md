@@ -50,10 +50,10 @@ tools.
    `mc_find_record` for a named person on the account. If both exist
    and they disagree, say so and use the record the user confirms.
 2. **Mailchimp half.** For the account's people you can resolve:
-   `mc_record_audiences`, `mc_engagement`, `mc_activity`. If they asked
-   about a recent campaign, `mc_campaigns` then `mc_campaign`.
-   Summarise opens, clicks, last send, and audience membership. Do not
-   dump Ids.
+   `mc_record_audiences`, `mc_engagement`, `mc_activity`. Always call
+   `mc_campaigns` as part of the brief, then `mc_campaign` on the most
+   recent relevant send. Summarise opens, clicks, last send, and
+   audience membership. Do not dump Ids.
 3. **Dropbox half.** `dbx_ensure` only if you need a folder to exist.
    Otherwise `dbx_summary` and `dbx_list`. Mention file count, freshness,
    and a few document names. Search if they named a file type

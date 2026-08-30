@@ -17,6 +17,7 @@ tools. Beaufort 12 is not in the data path.
 | `cold-audience-reengagement` | Build a re-engagement segment from stale members |
 | `deal-document-pack` | Assemble the Dropbox files for an Opportunity |
 | `account-brief` | Campaign engagement plus files on an Account |
+| `audience-build` | Build and schedule a Data Wizard into an audience |
 
 Install only the Apex actions you own on **one** Hosted MCP server. A
 Mailchimp-only org never registers Dropbox tools.
