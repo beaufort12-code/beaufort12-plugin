@@ -73,18 +73,16 @@ aliases are in parentheses.
 - Mailchimp: Subscribe Mailchimp Subscriber (`mc_subscribe`) — write
 - Mailchimp: Unsubscribe Mailchimp Subscriber (`mc_unsubscribe`) — write
 - Mailchimp: Manage Mailchimp Tags (`mc_tags`) — write
-- Mailchimp: Suggest Mailchimp Field Mappings (`mc_suggest`)
-- Mailchimp: Create Mailchimp Merge Field (`mc_merge_field`) — write
+- Mailchimp: Suggest Mailchimp Wizard Field Mappings (`mc_suggest`)
+- Mailchimp: Create Mailchimp Audience Merge Field (`mc_merge_field`) — write
 - Mailchimp: Create Mailchimp Data Wizard (`mc_create_wizard`) — write
 
 Do not add `McInvocableMembers`, `McInvocableTags`, or gateway utilities.
 The `McAgent*` classes are the agent interface.
 
-The last three build Data Wizards and are what `audience-build` needs.
-Their Setup-UI labels may read slightly differently in your org — match
-on "Suggest Mailchimp Wizard Field Mappings", "Create Mailchimp Audience
-Merge Field" and "Create Mailchimp Data Wizard", and pick the namespaced
-classes `mone__McAgentSuggestWizardMappings`,
+The last three are what `audience-build` needs. Setup-UI names match the
+labels above. Pick the namespaced classes
+`mone__McAgentSuggestWizardMappings`,
 `mone__McAgentCreateAudienceMergeField`, and
 `mone__McAgentCreateDataWizard`. Leave all three off the server if you
 only want a read-and-diagnose install; the skill then hands the admin a
@@ -223,7 +221,17 @@ After Activate, reconnect, and a **new** chat:
 4. Confirm `mc_find_audience` resolves a real audience name. The `*`
    wildcard listing is documented on the tool but is not implemented in
    every package version — test with a name you know exists, not `*`.
-5. Tell them to add the missing Apex actions, reconnect, and start a
+5. To confirm `audience-build` can write, paste this in a **new** chat,
+   using an audience name that exists:
+
+   Build a Data Wizard that syncs Contacts into <Audience name>. I want
+   Description to come across too. Run it now, then weekly on Mondays.
+
+   It should resolve the audience, check deliverability, then call
+   Suggest / Create Merge Field / Create Data Wizard (or the namespaced
+   Apex classes). If it says Data Wizard is UI-only, the three wizard
+   actions are not on this server — add them, reconnect, new chat.
+6. Tell them to add the missing Apex actions, reconnect, and start a
    new chat. If the tool list changes inside a live chat, that chat is
    unreliable — start a new one.
 

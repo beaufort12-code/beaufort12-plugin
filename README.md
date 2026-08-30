@@ -22,6 +22,30 @@ tools. Beaufort 12 is not in the data path.
 Install only the Apex actions you own on **one** Hosted MCP server. A
 Mailchimp-only org never registers Dropbox tools.
 
+## Try this
+
+After [SETUP.md](SETUP.md), in a **new** chat:
+
+```text
+We're sending a webinar invite on Thursday to <Audience name>. Is it safe to send?
+```
+
+```text
+Build a Data Wizard that syncs Contacts into <Audience name>. I want Description to come across too. Run it now, then weekly on Mondays.
+```
+
+The second prompt needs three Apex actions on the Hosted MCP server.
+In Setup → MCP Servers → Add Tools → **Apex actions**, add the
+namespaced classes:
+
+- Suggest Mailchimp Wizard Field Mappings (`mone__McAgentSuggestWizardMappings`)
+- Create Mailchimp Audience Merge Field (`mone__McAgentCreateAudienceMergeField`)
+- Create Mailchimp Data Wizard (`mone__McAgentCreateDataWizard`)
+
+Then disconnect, reconnect, and start a new chat. An old chat will not
+see the new tools. If those three are missing, Claude cannot create the
+wizard — it is not a UI-only feature.
+
 ## Install from this marketplace
 
 In Claude Code:
