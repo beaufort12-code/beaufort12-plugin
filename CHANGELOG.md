@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.1 — 2026-08-31
+
+- `audience-build` uses the namespaced Apex classes when Setup-UI Hosted
+  MCP has no starter aliases. A missing `mc_create_wizard` alias is not
+  a missing action.
+- Do not claim Data Wizard is UI-only. If the three wizard actions are
+  unregistered, say so and tell the admin to add them.
+- Use `recordFilters` / `includeAllRecords` when the create-wizard tool
+  schema exposes them.
+
 ## 0.3.0 — 2026-08-31
 
 - Add the `audience-build` skill: propose a Data Wizard, create missing

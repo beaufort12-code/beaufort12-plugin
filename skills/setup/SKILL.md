@@ -83,16 +83,20 @@ The `McAgent*` classes are the agent interface.
 
 The last three build Data Wizards and are what `audience-build` needs.
 Their Setup-UI labels may read slightly differently in your org — match
-on "Field Mapping", "Merge Field" and "Data Wizard", and pick the
-namespaced `mone__McAgent*` class. Leave all three off the server if you
+on "Suggest Mailchimp Wizard Field Mappings", "Create Mailchimp Audience
+Merge Field" and "Create Mailchimp Data Wizard", and pick the namespaced
+classes `mone__McAgentSuggestWizardMappings`,
+`mone__McAgentCreateAudienceMergeField`, and
+`mone__McAgentCreateDataWizard`. Leave all three off the server if you
 only want a read-and-diagnose install; the skill then hands the admin a
 build spec for the Data Wizard UI instead of calling anything.
 
-`mc_create_wizard` has no filter or criteria parameter — it takes a
-source object, an audience, a mapping, a schedule, and an optional
-recency window. A wizard syncs a population; a segment is built in
-Mailchimp on the merge fields it syncs. `audience-build` says so rather
-than pretending otherwise.
+`mc_create_wizard` takes a source object, an audience, a mapping, a
+schedule, an optional recency window, and — on current package versions
+— `recordFilters` and `includeAllRecords`. Use those when the tool
+schema exposes them. If they are absent, `audience-build` syncs the
+fields and puts the segment in Mailchimp rather than pretending the
+wizard filtered.
 
 Do not register Mailchimp extras the skills do not use:
 `mc_compare`, `mc_event`, `mc_recipients`, `mc_taxonomy`,
