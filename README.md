@@ -5,7 +5,7 @@ your Salesforce records. Skills decide the workflow. Your org's
 [Salesforce Hosted MCP](https://help.salesforce.com) server supplies the
 tools. Beaufort 12 is not in the data path.
 
-![Beaufort 12 — six guided workflows for Mailchimp and Dropbox, from Claude](docs/overview.jpg)
+![Beaufort 12 — Mailchimp and Dropbox workflows from Claude](docs/overview.jpg)
 
 ## What you get
 
@@ -27,6 +27,10 @@ Mailchimp-only org never registers Dropbox tools.
 After [SETUP.md](SETUP.md), in a **new** chat:
 
 ```text
+Give me an account brief on <Account>. Campaign engagement and the files on the record.
+```
+
+```text
 We're sending a webinar invite on Thursday to <Audience name>. Is it safe to send?
 ```
 
@@ -34,7 +38,11 @@ We're sending a webinar invite on Thursday to <Audience name>. Is it safe to sen
 Build a Data Wizard that syncs Contacts into <Audience name>. I want Description to come across too. Run it now, then weekly on Mondays.
 ```
 
-The second prompt needs three Apex actions on the Hosted MCP server.
+The audience in the last prompt must already exist in Mailchimp and have
+synced. Do not ask Claude to "create an audience" — the package creates
+a Data Wizard, not a Mailchimp audience.
+
+The wizard prompt needs three Apex actions on the Hosted MCP server.
 In Setup → MCP Servers → Add Tools → **Apex actions**, add the
 namespaced classes:
 

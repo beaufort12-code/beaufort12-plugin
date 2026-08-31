@@ -228,6 +228,9 @@ After Activate, reconnect, and a **new** chat:
    Build a Data Wizard that syncs Contacts into <Audience name>. I want
    Description to come across too. Run it now, then weekly on Mondays.
 
+   That audience must already exist. Do not use "Create an Audience" —
+   the package creates a Data Wizard, not a Mailchimp audience.
+
    It should resolve the audience, check deliverability, then call
    Suggest / Create Merge Field / Create Data Wizard (or the namespaced
    Apex classes). If it says Data Wizard is UI-only, the three wizard

@@ -2,6 +2,9 @@
 
 ## 0.3.1 — 2026-08-31
 
+- README examples: account brief first, then pre-send, then Data Wizard.
+  Spell out that the audience must already exist — do not "create an
+  audience".
 - `audience-build` uses the namespaced Apex classes when Setup-UI Hosted
   MCP has no starter aliases. A missing `mc_create_wizard` alias is not
   a missing action.
