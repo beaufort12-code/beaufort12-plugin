@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.2 — 2026-08-31
+
+- `audience-build`: never include `WITH USER_MODE` on Data Wizard SOQL.
+  The package appends it and a duplicate clause fails.
+
 ## 0.3.1 — 2026-08-31
 
 - README examples: account brief first, then pre-send, then Data Wizard.

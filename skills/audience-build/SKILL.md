@@ -56,6 +56,12 @@ If `recordFilters` is on the tool, pass the user's criteria as readable
 lines (for example `BillingCountry equals United Kingdom`). Do not
 invent SOQL.
 
+If you do write SOQL for a Data Wizard — a UI build spec, a `soql`
+tool field, or a `Mailchimp_Import__c.SOQL__c` value — **omit
+`WITH USER_MODE`**. The package appends it when it stores and runs the
+query (and also executes with `AccessLevel.USER_MODE`). Including it
+twice fails.
+
 If `recordFilters` is **not** on the tool schema, name that boundary in
 one sentence and offer the split that still works:
 
@@ -124,6 +130,7 @@ Wizard they want reused, and the tool result confirms it. Do not guess.
   `mc_create_wizard` / `mone__McAgentCreateDataWizard` are writes. Get a
   separate yes for each. One "go ahead" does not authorise both.
 - Never invent `mappingsJson`. It comes from `mc_suggest`.
+- Never put `WITH USER_MODE` on Data Wizard SOQL. The package adds it.
 - If a wizard already covers this population, say so and ask before
   building a second one. Duplicate wizards double the sync load.
 - Do not subscribe people directly to reach the same outcome faster.
