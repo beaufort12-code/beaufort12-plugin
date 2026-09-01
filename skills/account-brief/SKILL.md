@@ -54,10 +54,13 @@ tools.
    `mc_campaigns` as part of the brief, then `mc_campaign` on the most
    recent relevant send. Summarise opens, clicks, last send, and
    audience membership. Do not dump Ids.
-3. **Dropbox half.** `dbx_ensure` only if you need a folder to exist.
-   Otherwise `dbx_summary` and `dbx_list`. Mention file count, freshness,
-   and a few document names. Search if they named a file type
-   (contract, proposal, MSA).
+3. **Dropbox half.** `dbx_summary` and `dbx_list`. If either says the
+   folder is missing, moved, or not found, call `dbx_ensure` and list
+   again — a stale Salesforce mapping is not "no Dropbox folder".
+   Mention file count, freshness, and a few document names. If they
+   named a file type (proposal, MSA, SOW) and the record folder is
+   empty, `dbx_search` — do not pretend the record folder contains
+   files that only exist elsewhere in the workspace.
 4. **Do not share links** unless they asked. Sharing mutates Dropbox
    state — hand off to `deal-document-pack` or confirm first.
 

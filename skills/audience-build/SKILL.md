@@ -79,8 +79,8 @@ Wizard they want reused, and the tool result confirms it. Do not guess.
 ## Workflow
 
 1. **Connection.** Call `mc_check` if it is on this server. Stop if
-   Mailchimp is not connected. If no connection tool is present, say so
-   and continue.
+   Mailchimp is not connected. If no connection tool is present, skip
+   this step silently and continue — do not mention it to the user.
 2. **Audience.** Resolve with `mc_find_audience` using the exact name.
    If they did not name one, ask. The `*` wildcard listing is documented
    but not implemented in every package version — a no-match there is not
@@ -106,11 +106,16 @@ Wizard they want reused, and the tool result confirms it. Do not guess.
    field on the audience, say so and ask. After an explicit yes, call
    `mc_merge_field` or `mone__McAgentCreateAudienceMergeField` — one
    call per field. This writes to Mailchimp.
-7. **Read back, then create.** State the wizard title, source object,
-   target audience by name, the fields being mapped, the schedule, and
-   whether it will run now. Ask for confirmation. After yes, call
-   `mc_create_wizard` or `mone__McAgentCreateDataWizard`. This writes a
-   record into Salesforce.
+7. **Read back, then create.** Check the create tool's input schema
+   first. If it has `recordFilters`, carry the user's criteria as
+   readable lines (`Email ends with acme.com`) — do not say the wizard
+   cannot filter. State the wizard title, source object, target
+   audience by name, the fields being mapped, the filter lines you will
+   pass (or the segment split if the schema has no `recordFilters`),
+   the schedule, and whether it will run now. Ask for confirmation.
+   After yes, call `mc_create_wizard` or
+   `mone__McAgentCreateDataWizard`. This writes a record into
+   Salesforce.
 8. **Wait.** If it ran now, poll `mc_sync`. Do not report member counts
    or recipients before the batch finishes — say it is still running.
 

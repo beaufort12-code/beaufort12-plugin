@@ -39,7 +39,8 @@ Never ask the user for a Salesforce Id. Resolve names and emails with
 1. **Connection.** If `mc_check` or `mone__McAgentGetConnectionStatus`
    is on this server, call it. If Mailchimp is not connected, stop and
    tell the admin to finish Mailchimp Connect. If no connection tool is
-   present, say so and continue.
+   present, skip this step silently and continue — do not mention it to
+   the user.
 2. **Resolve the person.** Name or email → `mc_find_record`. If several
    records match, list names and emails and ask which one. Do not guess.
 3. **Resolve the audience.** If they named a list, `mc_find_audience`
@@ -65,14 +66,16 @@ Give a short diagnosis, then the next action. Typical outcomes:
 - **No email** — the Salesforce email field is blank. Sync cannot run.
 - **Not in the wizard / criteria** — they do not match the Data Wizard
   filters, or no wizard covers this population at all. Say which check
-  failed if the tool tells you. If the answer is that no wizard exists,
-  hand off to `audience-build` rather than subscribing them one by one.
+  failed if the tool tells you. If no wizard covers this population,
+  that is the diagnosis. Hand off to `audience-build`. Do not offer to
+  subscribe them one by one as the first option.
 - **Unsubscribed or cleaned in Mailchimp** — do not silently resubscribe.
   Explain status and ask before `mc_subscribe`.
 - **Sync still running** — wait and poll `mc_sync`. Do not create a
   second wizard.
-- **Truly missing** — offer to subscribe or run an existing wizard only
-  after confirmation.
+- **Truly missing, and a wizard already covers them** — offer to run
+  that wizard, or subscribe only after they explicitly want just this
+  person.
 
 ## Rules
 

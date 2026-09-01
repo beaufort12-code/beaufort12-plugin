@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.3 — 2026-09-01
+
+- Skip a missing connection-status tool silently. Do not announce it.
+- `sync-triage` hands off to `audience-build` when no wizard covers the
+  population. Do not lead with a one-off subscribe.
+- `audience-build` passes `recordFilters` when the create-wizard schema
+  exposes them.
+- `account-brief` retries `dbx_ensure` after a stale Dropbox mapping
+  instead of reporting no folder.
+
 ## 0.3.2 — 2026-08-31
 
 - `audience-build`: never include `WITH USER_MODE` on Data Wizard SOQL.

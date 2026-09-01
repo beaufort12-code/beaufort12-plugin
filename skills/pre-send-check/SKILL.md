@@ -34,7 +34,8 @@ Never ask for a Salesforce Id. Resolve the audience by name.
 
 1. **Connection.** If `mc_check` or `mone__McAgentGetConnectionStatus`
    is on this server, call it and stop if disconnected. If no
-   connection tool is present, say so and continue.
+   connection tool is present, skip this step silently and continue —
+   do not mention it to the user.
 2. **Audience.** Resolve with `mc_find_audience` using the exact name.
    If they did not name one, ask. Do not rely on the `*` wildcard listing
    — it is documented but not implemented in every package version, and a
