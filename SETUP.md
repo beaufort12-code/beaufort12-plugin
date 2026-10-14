@@ -108,6 +108,16 @@ Add these when Dropbox for Agentforce is installed.
 - Dropbox: Search Dropbox files by name (`dbx_search`) — class
   `dbx__DbAgentSearchFilesByName`. Older packages only expose
   `dbx__DbAgentSearchFiles`; add whichever search action the org has.
+- Dropbox: Search Dropbox file contents (`dbx_search_content`) — class
+  `dbx__DbAgentSearchFileContents`. The default search: matches file names
+  and the text inside files.
+- Dropbox: Read an exact record file (`dbx_read`) — class
+  `dbx__DbAgentReadRecordFile`. PDF, Word, PowerPoint, and Excel need
+  Dropbox for Agentforce 1.2 or later; they return `PENDING` first, so call
+  it again with the returned `extractionRef`.
+- Dropbox: Inspect documents (`dbx_inspect`) — class
+  `dbx__DbAgentAssessDocumentStatus`. Latest document, a question about it,
+  and signing status.
 - Dropbox: Ensure Dropbox folder for record (`dbx_ensure`)
 - Dropbox: List files in a record's Dropbox folder (`dbx_list`)
 - Dropbox: Get Dropbox record folder summary (`dbx_summary`)
@@ -117,14 +127,15 @@ Add these when Dropbox for Agentforce is installed.
 Share and folder-link actions are named "Get" but they **create** sharing
 state. Never call them speculatively.
 
-Register only these eight. Skip near-duplicates from the Setup UI
+Register only these eleven. Skip near-duplicates from the Setup UI
 (`SearchFiles` vs `SearchFilesByName`, `GetShareLink` vs
 `GetFileShareLink`, `CopyItem` / `CopyRecordItem` / `CopyDryRun`,
 `MoveItem` / `MoveRecordItem`, `RenameItem` / `RenameRecordItem`,
 `DeleteFile` / `DeleteRecordItem`, `CreateFolder` /
 `CreateRecordSubfolder`, `GetStorage` / `GetStorageSummary`,
 `ListFiles` / `ListRecordFiles` / `ListRecordFolders`,
-`CheckConnection` / `CheckConnectionStatus`). Extra tools cost context
+`CheckConnection` / `CheckConnectionStatus`, `ReadFile` /
+`ReadRecordFile`). Extra tools cost context
 and the truncated Setup-UI names are hard to tell apart.
 
 ## 3. External Client App
