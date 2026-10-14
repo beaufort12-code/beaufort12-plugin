@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.4 — 2026-10-14
+
+- SETUP recommends three more Dropbox tools: `dbx_search_content` (search
+  inside files), `dbx_read` (read a file, including PDF, Word, PowerPoint,
+  and Excel with Dropbox for Agentforce 1.2), and `dbx_inspect` (latest
+  document and signing status).
+- `deal-document-pack` answers "the latest proposal" and "is it signed"
+  with `dbx_inspect`, and reads documents with `dbx_read`. PDFs take two
+  calls: call again with the returned `extractionRef`.
+- `account-brief` names the newest document when `dbx_inspect` is present.
+
 ## 0.3.3 — 2026-09-01
 
 - Skip a missing connection-status tool silently. Do not announce it.

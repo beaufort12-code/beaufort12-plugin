@@ -39,6 +39,7 @@ package is not on this server.
 | Files | `dbx_list` | Dropbox: List files in a record's Dropbox folder |
 | Search | `dbx_search` | `dbx__DbAgentSearchFilesByName` |
 | Ensure folder | `dbx_ensure` | Dropbox: Ensure Dropbox folder for record |
+| Latest document | `dbx_inspect` | Dropbox: Inspect documents (optional) |
 
 Never ask for a Salesforce Id. Resolve "Acme" or "Disney" with the find
 tools.
@@ -57,7 +58,9 @@ tools.
 3. **Dropbox half.** `dbx_summary` and `dbx_list`. If either says the
    folder is missing, moved, or not found, call `dbx_ensure` and list
    again — a stale Salesforce mapping is not "no Dropbox folder".
-   Mention file count, freshness, and a few document names. If they
+   Mention file count, freshness, and a few document names. If
+   `dbx_inspect` is present, call it with `LATEST` to name the newest
+   document (it does not prove the document was sent). If they
    named a file type (proposal, MSA, SOW) and the record folder is
    empty, `dbx_search` — do not pretend the record folder contains
    files that only exist elsewhere in the workspace.
